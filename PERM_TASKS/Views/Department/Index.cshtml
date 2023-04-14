@@ -1,0 +1,71 @@
+﻿@model IEnumerable<PERM.Models.Department.DepartmentModel>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Index</h1>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.DeptName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ParentDepartment)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.DeptPayrollCostCenter)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.LeaveBlockList)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.LR_Approver)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.St_Approver)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Exp_Approver)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.DeptName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ParentDepartment.DeptName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DeptPayrollCostCenter)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.LeaveBlockList)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.LR_Approver)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.St_Approver)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Exp_Approver)
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.DeptID">Edit</a> |
+                <a asp-action="Details" asp-route-id="@item.DeptID">Details</a> |
+                <a asp-action="Delete" asp-route-id="@item.DeptID">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

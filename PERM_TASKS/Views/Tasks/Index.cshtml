@@ -1,0 +1,101 @@
+﻿@model IEnumerable<PERM.Models.Task._TasksModel>
+
+@{
+    ViewData["Title"] = "Index";
+}
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous"></script>
+
+<h1>Index</h1>
+ @*@if(User.IsInRole("superadmin")){*@
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+ @*}*@
+<table class="table table-striped-columns">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.TaskName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.TaskDescription)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.TaskStatus)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.TaskType)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Priority)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.TaskCreatedDate)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.TaskUpdatedDate)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.TaskDeadline)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.TaskCompletionDate)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.TaskAssignedTo)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.TaskAssignedBy)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.TaskName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.TaskDescription)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.TaskStatus)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.TaskType)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Priority)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.TaskCreatedDate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.TaskUpdatedDate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.TaskDeadline)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.TaskCompletionDate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.TaskAssignedTo.EmployeeID)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.TaskAssignedBy.EmployeeID)
+            </td>
+               @* @if (User.IsInRole("superadmin"))
+                {*@
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.TaskID">Edit</a> |
+                <a asp-action="Details" asp-route-id="@item.TaskID">Details</a> |
+                <a asp-action="Delete" asp-route-id="@item.TaskID">Delete</a>
+            </td>
+                @*}*@
+        </tr>
+}
+    </tbody>
+</table>

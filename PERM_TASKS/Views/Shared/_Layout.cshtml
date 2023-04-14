@@ -1,0 +1,111 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - PERM_TASKS</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/PERM_TASKS.styles.css" asp-append-version="true" />
+</head>
+<body>
+    <header>
+        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
+            <div class="container-fluid">
+                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index"><img src="/uploads/perm_logo.jpeg" height="55px" width="120px" alt="PerM" /></a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
+                        aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
+                    <ul class="navbar-nav flex-grow-1">
+
+                        @foreach (var menu in User.GetUserMenu().OrderBy(o => o.SortNo))
+                        {
+                            if (menu.ChildMenu is { Count: > 0 })
+                            {
+                                <div class="dropdown">
+                                    <button class="btn btn-secondary dropdown-toggle" style="margin-left: 10px;" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+                                        @menu.MenuName
+                                    </button>
+                                    <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                                        @foreach (var childMenu in menu.ChildMenu)
+                                        {
+                                            <li> <a class="nav-link text-dark my-hover" asp-area="@childMenu.AreaName" asp-controller="@childMenu.ControllerName" asp-action="@childMenu.ActionName">@childMenu.MenuName</a></li>
+                                        }
+                                    </ul>
+                                </div>
+                            }
+                            else
+                            {
+                                <li class="nav-item">
+                                    <a class="nav-link text-dark" asp-area="@menu.AreaName" asp-controller="@menu.ControllerName" asp-action="@menu.ActionName">@menu.MenuName</a>
+                                </li>
+                            }
+                        }
+
+
+                        @*@if (User.Identity.IsAuthenticated)
+                        {
+                        <li class="nav-item">
+                        <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
+                        </li>
+                        <li class="nav-item">
+                        <a class="nav-link text-dark" asp-area="" asp-controller="EmployeeMasterData" asp-action="Index">EmployeeMasterData</a>
+                        </li>
+
+                        <li class="nav-item">
+                        <a class="nav-link text-dark" asp-area="" asp-controller="Department" asp-action="Index">Department</a>
+                        </li>
+
+                        <li class="nav-item">
+                        <a class="nav-link text-dark" asp-area="" asp-controller="Tasks" asp-action="Index">Task</a>
+                        </li>
+
+                        <div class="dropdown">
+                        <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+                        Attendance
+                        </button>
+                        <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                        <li> <a class="nav-link text-dark my-hover" asp-area="" asp-controller="EmployeeAttendanceAssistant" asp-action="Index">Employee Attendance Assistant</a></li>
+                        <li> <a class="nav-link text-dark my-hover" asp-area="" asp-controller="EmployeeAttendanceRequest" asp-action="Index">Employee Attendance Request</a></li>
+                        <li> <a class="nav-link text-dark my-hover" asp-area="" asp-controller="EmployeeMarkAttendance" asp-action="Index">Employee Mark Attendance</a></li>
+
+                        </ul>
+                        </div>
+
+                        <div class="dropdown">
+                        <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+                        User Settings
+                        </button>
+                        <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                        <li><a class="dropdown-item nav-link text-dark" asp-area="" asp-controller="UserRoles" asp-action="Index">User Roles</a></li>
+                        <li><a class="dropdown-item nav-link text-dark" asp-area="" asp-controller="RoleManager" asp-action="Index">Manage User Roles</a></li>
+                        </ul>
+                        </div>
+
+                        }*@
+
+                    </ul>
+                    <partial name="_LoginPartial" />
+                </div>
+            </div>
+        </nav>
+    </header>
+    <div class="container">
+        <main role="main" class="pb-3">
+            @RenderBody()
+        </main>
+    </div>
+
+    <footer class="border-top footer text-muted">
+        <div class="container">
+            &copy; 2023 - PERM_TASKS - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+        </div>
+    </footer>
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    @await RenderSectionAsync("Scripts", required: false)
+</body>
+</html>

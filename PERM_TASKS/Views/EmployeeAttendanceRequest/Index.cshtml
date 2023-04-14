@@ -1,0 +1,77 @@
+﻿@model IEnumerable<PERM.Models.Attendance.EmployeeAttendanceRequestModel>
+
+@{
+    ViewData["Title"] = "Attendance Request";
+}
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous"></script>
+
+<h1>Attendance Request</h1>
+ @*@if(User.IsInRole("superadmin")){*@
+<p>
+    <a asp-action="Create">Request For Attendance</a>
+</p>
+ @*}*@
+<table class="table table-striped-columns">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.FromDate)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ToDate)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.HalfDayDate)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.HalfDay)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Reason)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Employee.EmployeeFirstName + " " + model.Employee.EmployeeMiddleName + " " + model.Employee.EmployeeLastName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Department.DeptName)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.FromDate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ToDate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.HalfDayDate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.HalfDay)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Reason)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Employee.EmployeeID)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Department.DeptID)
+            </td>
+               @* @if (User.IsInRole("superadmin"))
+                {*@
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.ID">Edit</a> |
+                <a asp-action="Details" asp-route-id="@item.ID">Details</a> |
+                <a asp-action="Delete" asp-route-id="@item.ID">Delete</a>
+            </td>
+                @*}*@
+        </tr>
+}
+    </tbody>
+</table>
