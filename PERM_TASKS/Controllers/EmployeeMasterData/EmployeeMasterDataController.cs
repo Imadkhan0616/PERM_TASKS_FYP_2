@@ -9,6 +9,7 @@ using PERM.Models.Employee_Master_Data;
 using PERM.Models.EmployeeMasterData;
 using PERM_TASKS.Data;
 using PERM.Models.Department;
+using PERM_TASKS.ViewModels;
 
 namespace PERM_TASKS.Controllers.EmployeeMasterData
 {
@@ -84,7 +85,7 @@ namespace PERM_TASKS.Controllers.EmployeeMasterData
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("EmployeeID,EmployeeFirstName,EmployeeMiddleName,EmployeeLastName,EmployeeStatus,EmployeeGender,EmployeeDob,EmployeeDoj,EmployeementType,EmergencyPhoneNo,EmployeeRelationToEmergence,JobApplicant,ContractEndDate,OfferDate,NoticeDays,ConfirmationDate,DateOfRetirement,DepartmentID,Grade,Designation,Branch,ReportTo,AttendanceDeviceId,Holidays,DefualtShift,SalaryMode,BankName,BankAccNumber,PayrollCostCenter,ProvidentFundAccount,HealthInsurranceProvider,HealthInsurranceNumber,MobileNumber,PreferredEmail,PersonalEnmail,CompanyEmail,PermanentAddress,CurrentAddress,PersonalBio,MatrialStatus,BloodGroup,FamilyBackground,HealthDetails,CNIC,DateOfIssue,ValidUpto,School_University,Qualification_Program,Level,YearOfPassing,PreviousCompany,PreviousDesignation,PreviousSalary,Address,HIC_Branch,HIC_FromDate,HIC_ToDate,EmployeeSalary,EmployeeNameGrade,EmployeeDesignation,RequiredSkills,Description,ResignationLetterDate,ExitInTo,RelievingDate,Feedback,NewWorkplace,ReasonForLeaving")] EmployeeMasterDataModel employeeMasterDataModel)
+        public async Task<IActionResult> Create([Bind("EmployeeID,EmployeeFirstName,EmployeeMiddleName,EmployeeLastName,EmployeeStatus,EmployeeGender,EmployeeDob,EmployeeDoj,EmployeementType,EmergencyPhoneNo,EmployeeRelationToEmergence,JobApplicant,ContractEndDate,OfferDate,NoticeDays,ConfirmationDate,DateOfRetirement,DepartmentID,Grade,Designation,Branch,ReportToID,AttendanceDeviceId,Holidays,DefualtShift,SalaryMode,BankName,BankAccNumber,PayrollCostCenter,ProvidentFundAccount,HealthInsurranceProvider,HealthInsurranceNumber,MobileNumber,PreferredEmail,PersonalEnmail,CompanyEmail,PermanentAddress,CurrentAddress,PersonalBio,MatrialStatus,BloodGroup,FamilyBackground,HealthDetails,CNIC,DateOfIssue,ValidUpto,School_University,Qualification_Program,Level,YearOfPassing,PreviousCompany,PreviousDesignation,PreviousSalary,Address,HIC_Branch,HIC_FromDate,HIC_ToDate,EmployeeSalary,EmployeeNameGrade,EmployeeDesignation,RequiredSkills,Description,ResignationLetterDate,ExitInTo,RelievingDate,Feedback,NewWorkplace,ReasonForLeaving")] EmployeeMasterDataModel employeeMasterDataModel)
         {
             if (ModelState.IsValid)
             {
@@ -167,7 +168,7 @@ namespace PERM_TASKS.Controllers.EmployeeMasterData
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(string id, [Bind("EmployeeID,EmployeeFirstName,EmployeeMiddleName,EmployeeLastName,EmployeeStatus,EmployeeGender,EmployeeDob,EmployeeDoj,EmployeementType,EmergencyPhoneNo,EmployeeRelationToEmergence,JobApplicant,ContractEndDate,OfferDate,NoticeDays,ConfirmationDate,DateOfRetirement,DepartmentID,Grade,Designation,Branch,ReportTo,AttendanceDeviceId,Holidays,DefualtShift,SalaryMode,BankName,BankAccNumber,PayrollCostCenter,ProvidentFundAccount,HealthInsurranceProvider,HealthInsurranceNumber,MobileNumber,PreferredEmail,PersonalEnmail,CompanyEmail,PermanentAddress,CurrentAddress,PersonalBio,MatrialStatus,BloodGroup,FamilyBackground,HealthDetails,CNIC,DateOfIssue,ValidUpto,School_University,Qualification_Program,Level,YearOfPassing,PreviousCompany,PreviousDesignation,PreviousSalary,Address,HIC_Branch,HIC_FromDate,HIC_ToDate,EmployeeSalary,EmployeeNameGrade,EmployeeDesignation,RequiredSkills,Description,ResignationLetterDate,ExitInTo,RelievingDate,Feedback,NewWorkplace,ReasonForLeaving")] EmployeeMasterDataModel employeeMasterDataModel)
+        public async Task<IActionResult> Edit(string id, [Bind("EmployeeID,EmployeeFirstName,EmployeeMiddleName,EmployeeLastName,EmployeeStatus,EmployeeGender,EmployeeDob,EmployeeDoj,EmployeementType,EmergencyPhoneNo,EmployeeRelationToEmergence,JobApplicant,ContractEndDate,OfferDate,NoticeDays,ConfirmationDate,DateOfRetirement,DepartmentID,Grade,Designation,Branch,ReportToID,AttendanceDeviceId,Holidays,DefualtShift,SalaryMode,BankName,BankAccNumber,PayrollCostCenter,ProvidentFundAccount,HealthInsurranceProvider,HealthInsurranceNumber,MobileNumber,PreferredEmail,PersonalEnmail,CompanyEmail,PermanentAddress,CurrentAddress,PersonalBio,MatrialStatus,BloodGroup,FamilyBackground,HealthDetails,CNIC,DateOfIssue,ValidUpto,School_University,Qualification_Program,Level,YearOfPassing,PreviousCompany,PreviousDesignation,PreviousSalary,Address,HIC_Branch,HIC_FromDate,HIC_ToDate,EmployeeSalary,EmployeeNameGrade,EmployeeDesignation,RequiredSkills,Description,ResignationLetterDate,ExitInTo,RelievingDate,Feedback,NewWorkplace,ReasonForLeaving")] EmployeeMasterDataModel employeeMasterDataModel)
         {
             if (id != employeeMasterDataModel.EmployeeID)
             {
@@ -192,19 +193,9 @@ namespace PERM_TASKS.Controllers.EmployeeMasterData
                         throw;
                     }
                 }
-                var employees = _context.employeeMasterData.ToList();
-
-                //var UppergradeEmp = employees.Where(x => x.Grade == ); 
-
-                employees.Insert(0,
-                    new EmployeeMasterDataModel
-                    { EmployeeID = "0", FullName = "---SELECT---" });
-
-                var upperGradeEmployees = employees.Where(e => !lowerGrades.Any(g => g == e.Grade)).ToList();
-
-
-                ViewData["ReportToID"] = new SelectList(upperGradeEmployees, "EmployeeID", "FullName", employeeMasterDataModel.ReportToID);
                 return RedirectToAction(nameof(Index));
+
+
             }
 
             var departments = _context.Departments.ToList();
@@ -216,6 +207,19 @@ namespace PERM_TASKS.Controllers.EmployeeMasterData
             ViewData["DepartmentID"] = new SelectList(departments, "DeptID", "DeptName", employeeMasterDataModel.DepartmentID);
             //ViewData["HIC_DepartmentID"] = new SelectList(departments, "DeptID", "DeptName", employeeMasterDataModel.HIC_DepartmentID);
             ViewData["EmployementType"] = new SelectList(EmployeementTypeList.Types, "ID", "Name", employeeMasterDataModel.EmployeementType);
+
+            var employees = _context.employeeMasterData.ToList();
+
+            //var UppergradeEmp = employees.Where(x => x.Grade == ); 
+
+            employees.Insert(0,
+                new EmployeeMasterDataModel
+                { EmployeeID = "0", FullName = "---SELECT---" });
+
+            var upperGradeEmployees = employees.Where(e => !lowerGrades.Any(g => g == e.Grade)).ToList();
+
+
+            ViewData["ReportToID"] = new SelectList(upperGradeEmployees, "EmployeeID", "FullName", employeeMasterDataModel.ReportToID);
 
             return View(employeeMasterDataModel);
         }
@@ -271,6 +275,16 @@ namespace PERM_TASKS.Controllers.EmployeeMasterData
 
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
+        }
+
+        //TasksAssignment
+
+        //[Consumes("application/x-www-form-urlencoded")]
+        //[HttpPost]
+        public JsonResult GetReportToEmployees(string id)
+        {
+            var ReportToEmployess = _context.employeeMasterData.Where(e => e.ReportToID == id).ToList();
+            return new JsonResult(ReportToEmployess);
         }
 
         private bool EmployeeMasterDataModelExists(string id)

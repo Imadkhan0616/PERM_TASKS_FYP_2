@@ -47,10 +47,12 @@ namespace PERM.Models.EmployeeMasterData
         [DisplayName("Employeement Type")]
         public string EmployeementType { get; set; }
 
+
+
         //----------------------------
         //Emergency Contact Details
 
-        
+
         [DisplayName("Emergency Contact Name")]
         public string? EmergencyPhoneNo { get; set; }
 

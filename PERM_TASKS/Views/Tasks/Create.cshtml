@@ -60,11 +60,11 @@
             </div>
             <div class="form-group">
                 <label asp-for="TaskAssignedToID" class="control-label"></label>
-                <select asp-for="TaskAssignedToID" class ="form-control" asp-items="ViewBag.TaskAssignedToID"></select>
+                <select asp-for="TaskAssignedToID" class="form-control" asp-items="ViewBag.TaskAssignedToID" id="TaskAssignedTo"></select>
             </div>
             <div class="form-group">
                 <label asp-for="TaskAssignedByID" class="control-label"></label>
-                <select asp-for="TaskAssignedByID" class ="form-control" asp-items="ViewBag.TaskAssignedByID"></select>
+                <select asp-for="TaskAssignedByID" class="form-control" asp-items="ViewBag.TaskAssignedByID" id="TaskAssignedBy"></select>
             </div>
             <div class="form-group">
                 <input type="submit" value="Create" class="btn btn-primary" />
@@ -80,3 +80,5 @@
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
 }
+<script src="~/lib/jquery/dist/jquery.js"></script>
+<script src="~/js/Tasks.js"></script>

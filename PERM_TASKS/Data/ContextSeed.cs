@@ -32,7 +32,7 @@ namespace PERM_TASKS.Data
                 var user = await userManager.FindByEmailAsync(defaultUser.Email);
                 if (user == null)
                 {
-                    await userManager.CreateAsync(defaultUser, "123Pa$$word");
+                    await userManager.CreateAsync(defaultUser, "Admin@123");
                     await userManager.AddToRoleAsync(defaultUser, Roles.Basic.ToString());
                     await userManager.AddToRoleAsync(defaultUser, Roles.PowerUser.ToString());
                     await userManager.AddToRoleAsync(defaultUser, Roles.Admin.ToString());

@@ -70,7 +70,7 @@
                 @Html.DisplayNameFor(model => model.Branch)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.ReportTo)
+                @Html.DisplayNameFor(model => model.ReportTo.EmployeeFirstName)
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.AttendanceDeviceId)
@@ -277,7 +277,7 @@
                 @Html.DisplayFor(modelItem => item.Branch)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.ReportTo)
+                @Html.DisplayFor(modelItem => item.ReportTo.EmployeeFirstName)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.AttendanceDeviceId)

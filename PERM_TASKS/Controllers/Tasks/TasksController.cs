@@ -66,6 +66,7 @@ namespace PERM.Controllers.Tasks
 
             var upperGradeEmployees = employees.Where(e => !lowerGrades.Any(g => g == e.Grade)).ToList();
 
+            var employeesUnderManager = employees.Where(e => e.EmployeeID == "200").ToList();
 
             ViewData["TaskAssignedByID"] = new SelectList(upperGradeEmployees, "EmployeeID", "FullName");
             ViewData["TaskAssignedToID"] = new SelectList(employees, "EmployeeID", "FullName");
